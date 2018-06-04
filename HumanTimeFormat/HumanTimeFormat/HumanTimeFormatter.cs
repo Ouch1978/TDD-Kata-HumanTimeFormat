@@ -24,28 +24,34 @@ namespace HumanTimeFormat
 
             TimeSpan timeSpan = TimeSpan.FromSeconds( seconds );
 
-            if( timeSpan.Days > 0 )
-            {
-                time += $", {timeSpan.Days} day";
+            time += ParseTime( seconds / 31556926 , "year" );
 
-                time += ( timeSpan.Days > 1 ) ? "s" : string.Empty;
-            }
+            timeSpan = TimeSpan.FromSeconds( seconds % 31556926 );
 
-            if( timeSpan.Minutes > 0 )
-            {
-                time += $", {timeSpan.Minutes} minute";
+            time += ParseTime( timeSpan.Days % 365 , "day" );
 
-                time += ( timeSpan.Minutes > 1 ) ? "s" : string.Empty;
-            }
+            time += ParseTime( timeSpan.Hours , "hour" );
 
-            if( timeSpan.Seconds > 0 )
-            {
-                time += $", {timeSpan.Seconds} second";
+            time += ParseTime( timeSpan.Minutes , "minute" );
 
-                time += ( timeSpan.Seconds > 1 ) ? "s" : string.Empty;
-            }
+            time += ParseTime( timeSpan.Seconds , "second" );
 
             return ReplaceComma( time );
+        }
+
+
+        private string ParseTime( int value , string unit )
+        {
+            string output = string.Empty;
+
+            if( value > 0 )
+            {
+                output += $", {value} {unit}";
+
+                output += ( value > 1 ) ? "s" : string.Empty;
+            }
+
+            return output;
         }
 
         private string ReplaceComma( string time )
@@ -57,7 +63,7 @@ namespace HumanTimeFormat
 
             if( time.Count( s => s == ',' ) >= 1 )
             {
-                time = time.Remove( time.LastIndexOf( ',' ) , 1 ).Insert( time.LastIndexOf( ',' ) , "and" );
+                time = time.Remove( time.LastIndexOf( ',' ) , 1 ).Insert( time.LastIndexOf( ',' ) , " and" );
             }
 
             return time;

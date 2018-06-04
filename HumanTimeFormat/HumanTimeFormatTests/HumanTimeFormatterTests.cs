@@ -37,5 +37,60 @@ namespace HumanTimeFormat.Tests
         {
             _formatter.Format( 60 ).Should().Be( "1 minute" );
         }
+
+        [TestMethod()]
+        public void TestInput61()
+        {
+            _formatter.Format( 61 ).Should().Be( "1 minute and 1 second" );
+        }
+
+        [TestMethod()]
+        public void TestInput310()
+        {
+            _formatter.Format( 310 ).Should().Be( "5 minutes and 10 seconds" );
+        }
+
+        [TestMethod()]
+        public void TestInput3600()
+        {
+            _formatter.Format( 3600 ).Should().Be( "1 hour" );
+        }
+
+        [TestMethod()]
+        public void TestInput3661()
+        {
+            _formatter.Format( 3661 ).Should().Be( "1 hour, 1 minute and 1 second" );
+        }
+
+        [TestMethod()]
+        public void TestInput90061()
+        {
+            _formatter.Format( 90061 ).Should().Be( "1 day, 1 hour, 1 minute and 1 second" );
+        }
+
+        [TestMethod()]
+        public void TestInput900610()
+        {
+            _formatter.Format( 900610 ).Should().Be( "10 days, 10 hours, 10 minutes and 10 seconds" );
+        }
+
+        [TestMethod()]
+        public void TestInput31556926()
+        {
+            _formatter.Format( 31556926 ).Should().Be( "1 year" );
+        }
+
+        [TestMethod()]
+        public void TestInput315569261()
+        {
+            _formatter.Format( 315569261 ).Should().Be( "10 years and 1 second" );
+        }
+
+        [TestMethod()]
+        public void TestInput316469870()
+        {
+            _formatter.Format( 316469870 ).Should().Be( "10 years, 10 days, 10 hours, 10 minutes and 10 seconds" );
+        }
+
     }
 }
