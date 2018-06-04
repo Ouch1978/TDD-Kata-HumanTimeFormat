@@ -24,11 +24,40 @@ namespace HumanTimeFormat
 
             TimeSpan timeSpan = TimeSpan.FromSeconds( seconds );
 
-            if(timeSpan.Seconds > 0 )
+            if( timeSpan.Days > 0 )
             {
-                time = $"{timeSpan.Seconds} second";
+                time += $", {timeSpan.Days} day";
+
+                time += ( timeSpan.Days > 1 ) ? "s" : string.Empty;
+            }
+
+            if( timeSpan.Minutes > 0 )
+            {
+                time += $", {timeSpan.Minutes} minute";
+
+                time += ( timeSpan.Minutes > 1 ) ? "s" : string.Empty;
+            }
+
+            if( timeSpan.Seconds > 0 )
+            {
+                time += $", {timeSpan.Seconds} second";
 
                 time += ( timeSpan.Seconds > 1 ) ? "s" : string.Empty;
+            }
+
+            return ReplaceComma( time );
+        }
+
+        private string ReplaceComma( string time )
+        {
+            if( time.StartsWith( "," ) == true )
+            {
+                time = time.Substring( 2 );
+            }
+
+            if( time.Count( s => s == ',' ) >= 1 )
+            {
+                time = time.Remove( time.LastIndexOf( ',' ) , 1 ).Insert( time.LastIndexOf( ',' ) , "and" );
             }
 
             return time;
