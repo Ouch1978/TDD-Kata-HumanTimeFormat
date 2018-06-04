@@ -15,12 +15,23 @@ namespace HumanTimeFormat
 
         public string Format( int seconds )
         {
+            string time = string.Empty;
+
             if( seconds == 0 )
             {
                 return "now";
             }
 
-            return string.Empty;
+            TimeSpan timeSpan = TimeSpan.FromSeconds( seconds );
+
+            if(timeSpan.Seconds > 0 )
+            {
+                time = $"{timeSpan.Seconds} second";
+
+                time += ( timeSpan.Seconds > 1 ) ? "s" : string.Empty;
+            }
+
+            return time;
         }
     }
 }
