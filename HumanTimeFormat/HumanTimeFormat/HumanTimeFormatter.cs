@@ -42,16 +42,12 @@ namespace HumanTimeFormat
 
         private string ParseTime( int value , string unit )
         {
-            string output = string.Empty;
-
             if( value > 0 )
             {
-                output += $", {value} {unit}";
-
-                output += ( value > 1 ) ? "s" : string.Empty;
+                return ( value > 1 ) ? $", {value} {unit}s" : $", {value} {unit}";
             }
 
-            return output;
+            return string.Empty;
         }
 
         private string ReplaceComma( string time )

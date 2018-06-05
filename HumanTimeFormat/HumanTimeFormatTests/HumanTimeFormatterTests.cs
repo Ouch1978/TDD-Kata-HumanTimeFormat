@@ -63,6 +63,13 @@ namespace HumanTimeFormat.Tests
         }
 
         [TestMethod()]
+        public void TestInput3662()
+        {
+            _formatter.Format( 3662 ).Should().Be( "1 hour, 1 minute and 2 seconds" );
+        }
+
+
+        [TestMethod()]
         public void TestInput90061()
         {
             _formatter.Format( 90061 ).Should().Be( "1 day, 1 hour, 1 minute and 1 second" );
